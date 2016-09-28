@@ -1,0 +1,8 @@
+main: com.perceivedev.randomlore.RandomLore
+name: RandomLore
+description: A plugin request by JustNoHacks
+version: 1.0
+commands:
+    randomlore:
+        description: The main command for RandomLore
+        usage: Rayzr forgot to register his commands again...
