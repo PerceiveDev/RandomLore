@@ -1,11 +1,18 @@
-# The identifier regular expression
+# The regular expression to match the lore. This is what will be replaced. Must be the only thing in the lore line
+# Beware. Some characters are 'meta' characters and must be escaped.
+# Have a look here: https://en.wikipedia.org/wiki/Regular_expression
 identifierRegEx: "%LORE%"
 
+# The lores to use
 lores:
+  # The name of the lore. Must be unique, but else unimportant
   test:
+    # The lore. May be multiple lines
     lore:
     - "&6| 33&r"
     - "&6| Yea&r"
+    # The statistical weight of this lore. These numbers can be anything, but summing up to a multiple of 10 is best.
+    # So this is okay, as they are 1 together (10^0). Summing up to 100 is fine too (10^2). What you like best.
     weight: 0.6
   another:
     lore:

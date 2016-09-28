@@ -77,11 +77,11 @@ public class LoreListener implements Listener {
     }
 
     private boolean isReplaceableItemStack(ItemStack itemStack) {
-        return itemStack != null 
-                && itemStack.getType() != Material.AIR 
-                && itemStack.hasItemMeta() 
-                && itemStack.getItemMeta().hasLore() 
-                && doesListMatchIdentifier(itemStack.getItemMeta().getLore());
+        return itemStack != null
+                  && itemStack.getType() != Material.AIR
+                  && itemStack.hasItemMeta()
+                  && itemStack.getItemMeta().hasLore()
+                  && doesListMatchIdentifier(itemStack.getItemMeta().getLore());
     }
 
     private boolean doesListMatchIdentifier(List<String> list) {
