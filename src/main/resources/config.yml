@@ -1,0 +1,16 @@
+lores:
+  test:
+    lore:
+    - "| 33"
+    - "| Yea"
+    weight: 33
+  another:
+    lore:
+    - "< Also 33"
+    - "< Also 33"
+    weight: 33
+  another2:
+    lore:
+    - "> 33"
+    - "> 33"
+    weight: 33
