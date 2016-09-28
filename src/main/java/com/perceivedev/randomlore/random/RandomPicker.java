@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+import com.perceivedev.randomlore.RandomLore;
+
 /**
  * Picks a random entry
  *
@@ -11,9 +13,9 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class RandomPicker<T extends WeightedObject> {
 
-    private boolean dirty;
-    private int[]   cumSum;
-    private int     totalSum;
+    private boolean  dirty;
+    private double[] cumSum;
+    private double   totalSum;
     private List<T> objects = new ArrayList<T>();
 
     /**
@@ -38,18 +40,25 @@ public class RandomPicker<T extends WeightedObject> {
         dirty = true;
     }
 
+    /**
+     * Returns the amount of objects to choose from
+     *
+     * @return The amount of objects in this parser
+     */
+    public int getAmount() {
+        return objects.size();
+    }
+
     private void update() {
-        cumSum = new int[objects.size()];
+        cumSum = new double[objects.size()];
 
         totalSum = 0;
         for (int i = 0; i < objects.size(); i++) {
             T object = objects.get(i);
-            int weight = object.getWeight();
+            double weight = object.getWeight();
 
-            System.out.println("Total: " + totalSum + " -> " + (totalSum + weight) + " " + object.toString());
-            
             totalSum += weight;
-            
+
             cumSum[i] = totalSum;
         }
 
@@ -65,7 +74,7 @@ public class RandomPicker<T extends WeightedObject> {
             update();
         }
 
-        double random = ThreadLocalRandom.current().nextInt(totalSum);
+        double random = ThreadLocalRandom.current().nextDouble(totalSum);
 
         for (int i = 0; i < objects.size(); i++) {
             T object = objects.get(i);
@@ -74,9 +83,11 @@ public class RandomPicker<T extends WeightedObject> {
                 return object;
             }
         }
-        
+
         // this can't happen
-        System.out.println("WHAT THE HECK HAPPENED");
+        RandomLore.getInstance().getLogger().warning("What the hell happened?"
+                  + " The sums didn't line up o_O."
+                  + " Report this and pray to a deity of your choice.");
         return null;
     }
 }

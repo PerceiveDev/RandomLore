@@ -1,16 +1,19 @@
+# The identifier regular expression
+identifierRegEx: "%LORE%"
+
 lores:
   test:
     lore:
-    - "| 33"
-    - "| Yea"
-    weight: 33
+    - "&6| 33&r"
+    - "&6| Yea&r"
+    weight: 0.6
   another:
     lore:
-    - "< Also 33"
-    - "< Also 33"
-    weight: 33
+    - "&c< Also 33&r"
+    - "&c< Also 33&r"
+    weight: 0.3
   another2:
     lore:
-    - "> 33"
-    - "> 33"
-    weight: 33
+    - "&a> 33&r"
+    - "&a> 33&r"
+    weight: 0.1

@@ -3,7 +3,9 @@ package com.perceivedev.randomlore.data;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 
 import com.perceivedev.randomlore.random.WeightedObject;
@@ -12,17 +14,23 @@ import com.perceivedev.randomlore.random.WeightedObject;
  * A Lore
  */
 public class LoreObject implements WeightedObject {
-    
+
     private List<String> lore;
-    private int          weight;
+    private double       weight;
 
     /**
      * @param lore The Lore to use
      * @param weight The weight for this lore.
      */
-    public LoreObject(List<String> lore, int weight) {
-        this.lore = lore;
+    private LoreObject(List<String> lore, double weight) {
+        this.lore = colorList(lore);
         this.weight = weight;
+    }
+
+    private List<String> colorList(List<String> list) {
+        return list.stream()
+                  .map(s -> ChatColor.translateAlternateColorCodes('&', s))
+                  .collect(Collectors.toList());
     }
 
     /**
@@ -30,8 +38,8 @@ public class LoreObject implements WeightedObject {
      *
      * @param section The section to read from
      */
-    public LoreObject(ConfigurationSection section) {
-        this(section.getStringList("lore"), section.getInt("weight"));
+    LoreObject(ConfigurationSection section) {
+        this(section.getStringList("lore"), section.getDouble("weight"));
     }
 
     /**
@@ -46,7 +54,7 @@ public class LoreObject implements WeightedObject {
     /**
      * @return The statistical weight of this entry
      */
-    public int getWeight() {
+    public double getWeight() {
         return weight;
     }
 

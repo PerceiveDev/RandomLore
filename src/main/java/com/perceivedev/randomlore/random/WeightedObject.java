@@ -10,5 +10,5 @@ public interface WeightedObject {
      *
      * @return The Weight
      */
-    int getWeight();
+    double getWeight();
 }
