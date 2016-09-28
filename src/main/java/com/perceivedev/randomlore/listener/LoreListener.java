@@ -9,6 +9,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -28,23 +30,35 @@ public class LoreListener implements Listener {
         replaceInInventory(e.getPlayer().getInventory());
         replaceInInventory(e.getInventory());
     }
-    
+
     @EventHandler
     public void onInventoryClick(InventoryClickEvent e) {
         replaceInInventory(e.getWhoClicked().getInventory());
         replaceInInventory(e.getInventory());
+        replaceLore(e.getCursor());
+        replaceLore(e.getCurrentItem());
+    }
+
+    @EventHandler
+    public void onPlayerClick(PlayerInteractEvent e) {
+        replaceLore(e.getItem());
+    }
+
+    @EventHandler
+    public void onPlayerCollectItem(PlayerPickupItemEvent e) {
+        replaceLore(e.getItem().getItemStack());
     }
 
     private void replaceInInventory(Inventory inventory) {
         for (ItemStack itemStack : inventory) {
-            if (!isReplaceableItemStack(itemStack)) {
-                continue;
-            }
             replaceLore(itemStack);
         }
     }
 
     private void replaceLore(ItemStack itemStack) {
+        if (!isReplaceableItemStack(itemStack)) {
+            return;
+        }
         ItemMeta meta = itemStack.getItemMeta().clone();
         List<String> newLore = new ArrayList<>();
 
@@ -63,11 +77,11 @@ public class LoreListener implements Listener {
     }
 
     private boolean isReplaceableItemStack(ItemStack itemStack) {
-        return itemStack != null
-                  && itemStack.getType() != Material.AIR
-                  && itemStack.hasItemMeta()
-                  && itemStack.getItemMeta().hasLore()
-                  && doesListMatchIdentifier(itemStack.getItemMeta().getLore());
+        return itemStack != null 
+                && itemStack.getType() != Material.AIR 
+                && itemStack.hasItemMeta() 
+                && itemStack.getItemMeta().hasLore() 
+                && doesListMatchIdentifier(itemStack.getItemMeta().getLore());
     }
 
     private boolean doesListMatchIdentifier(List<String> list) {
@@ -82,5 +96,5 @@ public class LoreListener implements Listener {
     private boolean isIdentifier(String string) {
         return DETECTION_PATTERN.matcher(string).matches();
     }
-    
+
 }
