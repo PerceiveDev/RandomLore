@@ -13,7 +13,7 @@ import com.perceivedev.randomlore.random.RandomPicker;
  */
 public class RandomLore extends JavaPlugin {
 
-    private static RandomLore instance;
+    private static RandomLore        instance;
 
     private RandomPicker<LoreObject> randomPicker;
 

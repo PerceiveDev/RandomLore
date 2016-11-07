@@ -16,7 +16,7 @@ public class RandomPicker<T extends WeightedObject> {
     private boolean  dirty;
     private double[] cumSum;
     private double   totalSum;
-    private List<T> objects = new ArrayList<T>();
+    private List<T>  objects = new ArrayList<T>();
 
     /**
      * Adds an entry if it doesn't already exist
@@ -86,8 +86,8 @@ public class RandomPicker<T extends WeightedObject> {
 
         // this can't happen
         RandomLore.getInstance().getLogger().warning("What the hell happened?"
-                  + " The sums didn't line up o_O."
-                  + " Report this and pray to a deity of your choice.");
+                + " The sums didn't line up o_O."
+                + " Report this and pray to a deity of your choice.");
         return null;
     }
 }

@@ -29,8 +29,8 @@ public class LoreObject implements WeightedObject {
 
     private List<String> colorList(List<String> list) {
         return list.stream()
-                  .map(s -> ChatColor.translateAlternateColorCodes('&', s))
-                  .collect(Collectors.toList());
+                .map(s -> ChatColor.translateAlternateColorCodes('&', s))
+                .collect(Collectors.toList());
     }
 
     /**
@@ -61,9 +61,9 @@ public class LoreObject implements WeightedObject {
     @Override
     public String toString() {
         return "LoreObject{" +
-                  "lore=" + lore +
-                  ", weight=" + weight +
-                  '}';
+                "lore=" + lore +
+                ", weight=" + weight +
+                '}';
     }
 
     @Override
@@ -74,7 +74,7 @@ public class LoreObject implements WeightedObject {
             return false;
         LoreObject that = (LoreObject) o;
         return Double.compare(that.weight, weight) == 0 &&
-                  Objects.equals(lore, that.lore);
+                Objects.equals(lore, that.lore);
     }
 
     @Override

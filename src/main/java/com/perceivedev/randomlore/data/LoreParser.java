@@ -35,12 +35,12 @@ public class LoreParser {
             if (!validateCorrectFormat(configurationSection)) {
                 logger.warning("Corrupted key: '" + key + "'. No lore or weight given or in a wrong format.");
                 logger.warning("Detailed data: [Is null: "
-                          + (configurationSection == null)
-                          + "] [Misses Lore: "
-                          + (!configurationSection.contains("lore")
-                          + "] [Misses Weight: "
-                          + (!configurationSection.contains("weight")
-                          + "]")));
+                        + (configurationSection == null)
+                        + "] [Misses Lore: "
+                        + (!configurationSection.contains("lore")
+                                + "] [Misses Weight: "
+                                + (!configurationSection.contains("weight")
+                                        + "]")));
                 continue;
             }
 
